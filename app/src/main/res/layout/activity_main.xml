@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
     android:scrollbars="vertical">
 
@@ -16,11 +15,11 @@
         android:layout_marginTop="80dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_gravity="center_vertical"
         android:background="@color/white">
 
-        <!-- Карточка для отображения результата -->
+        <!-- Карточка для отображения текущего результата -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/current_result_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -41,7 +40,19 @@
                     android:text="Результат сканирования:"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:gravity="center" />
+
+                <!-- Тип данных -->
+                <TextView
+                    android:id="@+id/tv_result_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp"
+                    android:textStyle="italic"
+                    android:gravity="center"
+                    android:visibility="gone" />
 
                 <!-- Для текста -->
                 <TextView
@@ -51,8 +62,9 @@
                     android:layout_marginTop="8dp"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:visibility="gone"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:visibility="gone" />
 
                 <!-- Для ссылок -->
                 <TextView
@@ -62,7 +74,9 @@
                     android:layout_marginTop="8dp"
                     android:textColor="@color/design_default_color_primary"
                     android:textSize="16sp"
-                    android:visibility="gone"/>
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:visibility="gone" />
 
                 <!-- Для изображений -->
                 <ImageView
@@ -72,19 +86,11 @@
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:visibility="gone" />
-                <!-- Тип данных -->
-                <TextView
-                    android:id="@+id/tv_result_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textSize="14sp"
-                    android:textStyle="italic"
-                    android:visibility="gone" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-        <!-- Кнопка для запуска сканера -->
+
+        <!-- Кнопки -->
         <Button
             android:id="@+id/btn_scan"
             android:layout_width="wrap_content"
@@ -92,6 +98,7 @@
             android:text="Сканировать QR-код"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"/>
+
         <Button
             android:id="@+id/btn_clear"
             android:layout_width="wrap_content"
@@ -99,10 +106,45 @@
             android:text="Очистить экран"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"/>
-        <!-- Пустое пространство внизу для удобства прокрутки -->
+
+        <Button
+            android:id="@+id/btn_clear_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Очистить историю"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#FF4444"/>
+
+        <!-- Разделитель и заголовок истории -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#CCCCCC"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="История сканирований"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- Контейнер для истории -->
+        <LinearLayout
+            android:id="@+id/history_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"/>
+
+        <!-- Пустое пространство -->
         <Space
             android:layout_width="match_parent"
-            android:layout_height="100dp"/>
+            android:layout_height="50dp"/>
 
     </LinearLayout>
 </ScrollView>
