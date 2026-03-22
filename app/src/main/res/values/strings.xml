@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">QR Scanner с историей</string>
+    <string name="dialog_zagolovok">Описание</string>
+</resources>
