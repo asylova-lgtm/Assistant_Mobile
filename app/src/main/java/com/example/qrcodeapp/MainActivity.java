@@ -625,15 +625,35 @@ public class MainActivity extends AppCompatActivity {
     private boolean isChemicalElement(String text) {
         // Словарь химических элементов на русском и английском
         String[] chemicalKeywords = {
-                "водород", "гелий", "литий", "углерод", "кислород", "железо",
-                "золото", "серебро", "медь", "цинк", "свинец", "ртуть", "алюминий",
-                "натрий", "калий", "магний", "кальций", "кремний", "фосфор", "сера",
-                "хлор", "аргон", "азот", "фтор", "бром", "йод",
+                "водород", "гелий", "литий", "бериллий", "бор", "углерод", "азот", "кислород",
+                "фтор", "неон", "натрий", "магний", "алюминий", "кремний", "фосфор", "сера", "хлор",
+                "аргон", "калий", "кальций", "скандий", "титан", "ванадий", "хром", "марганец",
+                "железо", "кобальт", "никель", "медь", "цинк", "галлий", "германий", "мышьяк", "селен",
+                "бром", "криптон", "рубидий", "стронций", "иттрий", "цирконий", "ниобий", "молибден",
+                "технеций", "рутений", "родий", "палладий", "серебро", "кадмий", "индий", "олово",
+                "сурьма", "теллур", "йод", "ксенон", "цезий", "барий", "лантан", "церий", "празеодим",
+                "неодим", "прометий", "самарий", "европий", "гадолиний", "тербий", "диспрозий", "гольмий",
+                "эрбий", "тулий", "иттербий", "лютеций", "гафний", "тантал", "вольфрам", "рений", "осмий",
+                "иридий", "платина", "золото", "ртуть", "таллий", "свинец", "висмут", "полоний", "астат",
+                "радон", "франций", "радий", "актиний", "торий", "протактиний", "уран", "нептуний", "плутоний",
+                "америций", "кюрий", "берклий", "калифорний", "эйнштейний", "фермий", "менделевий", "нобелий",
+                "лоуренсий", "резерфордий", "дубний", "сиборгий", "борий", "хассий", "мейтнерий", "дармштадтий",
+                "рентгений", "коперниций", "нихоний", "флеровий", "московий", "ливерморий", "теннессин", "оганесон",
                 // Английские названия
-                "hydrogen", "helium", "lithium", "carbon", "oxygen", "iron",
-                "gold", "silver", "copper", "zinc", "lead", "mercury", "aluminum",
-                "sodium", "potassium", "magnesium", "calcium", "silicon", "phosphorus", "sulfur",
-                "chlorine", "argon", "nitrogen", "fluorine", "bromine", "iodine"
+                "hydrogen", "helium", "lithium", "beryllium", "boron", "carbon", "nitrogen", "oxygen", "fluorine",
+                "neon", "sodium", "magnesium", "aluminum", "silicon", "phosphorus", "sulfur", "chlorine", "argon",
+                "potassium", "calcium", "scandium", "titanium", "vanadium", "chromium", "manganese", "iron", "cobalt",
+                "nickel", "copper", "zinc", "gallium", "germanium", "arsenic", "selenium", "bromine", "krypton",
+                "rubidium", "strontium", "yttrium", "zirconium", "niobium", "molybdenum", "technetium", "ruthenium",
+                "rhodium", "palladium", "silver", "cadmium", "indium", "tin", "antimony", "tellurium", "iodine", "xenon",
+                "cesium", "barium", "lanthanum", "cerium", "praseodymium", "neodymium", "promethium", "samarium", "europium",
+                "gadolinium", "terbium", "dysprosium", "holmium", "erbium", "thulium", "ytterbium", "lutetium", "hafnium",
+                "tantalum", "tungsten", "rhenium", "osmium", "iridium", "platinum", "gold", "mercury", "thallium", "lead",
+                "bismuth", "polonium", "astatine", "radon", "francium", "radium", "actinium", "thorium", "protactinium",
+                "uranium", "neptunium", "plutonium", "americium", "curium", "berkelium", "californium", "einsteinium",
+                "fermium", "mendelevium", "nobelium", "lawrencium", "rutherfordium", "dubnium", "seaborgium", "bohrium",
+                "hassium", "meitnerium", "darmstadtium", "roentgenium", "copernicium", "nihonium", "flerovium", "moscovium",
+                "livermorium", "tennessine", "oganesson"
         };
 
         String lowerText = text.toLowerCase();
@@ -651,33 +671,240 @@ public class MainActivity extends AppCompatActivity {
         nameToSymbol.put("водород", "H");
         nameToSymbol.put("гелий", "He");
         nameToSymbol.put("литий", "Li");
+        nameToSymbol.put("бериллий", "Be");
+        nameToSymbol.put("бор", "B");
         nameToSymbol.put("углерод", "C");
+        nameToSymbol.put("азот", "N");
         nameToSymbol.put("кислород", "O");
-        nameToSymbol.put("железо", "Fe");
-        nameToSymbol.put("золото", "Au");
-        nameToSymbol.put("серебро", "Ag");
-        nameToSymbol.put("медь", "Cu");
+        nameToSymbol.put("фтор", "F");
+        nameToSymbol.put("неон", "Ne");
+        nameToSymbol.put("натрий", "Na");
+        nameToSymbol.put("магний", "Mg");
         nameToSymbol.put("алюминий", "Al");
         nameToSymbol.put("кремний", "Si");
         nameToSymbol.put("фосфор", "P");
         nameToSymbol.put("сера", "S");
         nameToSymbol.put("хлор", "Cl");
-        nameToSymbol.put("кальций", "Ca");
-        nameToSymbol.put("натрий", "Na");
+        nameToSymbol.put("аргон", "Ar");
         nameToSymbol.put("калий", "K");
-        nameToSymbol.put("магний", "Mg");
-
+        nameToSymbol.put("кальций", "Ca");
+        nameToSymbol.put("скандий", "Sc");
+        nameToSymbol.put("титан", "Ti");
+        nameToSymbol.put("ванадий", "V");
+        nameToSymbol.put("хром", "Cr");
+        nameToSymbol.put("марганец", "Mn");
+        nameToSymbol.put("железо", "Fe");
+        nameToSymbol.put("кобальт", "Co");
+        nameToSymbol.put("никель", "Ni");
+        nameToSymbol.put("медь", "Cu");
+        nameToSymbol.put("цинк", "Zn");
+        nameToSymbol.put("галлий", "Ga");
+        nameToSymbol.put("германий", "Ge");
+        nameToSymbol.put("мышьяк", "As");
+        nameToSymbol.put("селен", "Se");
+        nameToSymbol.put("бром", "Br");
+        nameToSymbol.put("криптон", "Kr");
+        nameToSymbol.put("рубидий", "Rb");
+        nameToSymbol.put("стронций", "Sr");
+        nameToSymbol.put("иттрий", "Y");
+        nameToSymbol.put("цирконий", "Zr");
+        nameToSymbol.put("ниобий", "Nb");
+        nameToSymbol.put("молибден", "Mo");
+        nameToSymbol.put("технеций", "Tc");
+        nameToSymbol.put("рутений", "Ru");
+        nameToSymbol.put("родий", "Rh");
+        nameToSymbol.put("палладий", "Pd");
+        nameToSymbol.put("серебро", "Ag");
+        nameToSymbol.put("кадмий", "Cd");
+        nameToSymbol.put("индий", "In");
+        nameToSymbol.put("олово", "Sn");
+        nameToSymbol.put("сурьма", "Sb");
+        nameToSymbol.put("теллур", "Te");
+        nameToSymbol.put("йод", "I");
+        nameToSymbol.put("ксенон", "Xe");
+        nameToSymbol.put("цезий", "Cs");
+        nameToSymbol.put("барий", "Ba");
+        nameToSymbol.put("лантан", "La");
+        nameToSymbol.put("церий", "Ce");
+        nameToSymbol.put("празеодим", "Pr");
+        nameToSymbol.put("неодим", "Nd");
+        nameToSymbol.put("прометий", "Pm");
+        nameToSymbol.put("самарий", "Sm");
+        nameToSymbol.put("европий", "Eu");
+        nameToSymbol.put("гадолиний", "Gd");
+        nameToSymbol.put("тербий", "Tb");
+        nameToSymbol.put("диспрозий", "Dy");
+        nameToSymbol.put("гольмий", "Ho");
+        nameToSymbol.put("эрбий", "Er");
+        nameToSymbol.put("тулий", "Tm");
+        nameToSymbol.put("иттербий", "Yb");
+        nameToSymbol.put("лютеций", "Lu");
+        nameToSymbol.put("гафний", "Hf");
+        nameToSymbol.put("тантал", "Ta");
+        nameToSymbol.put("вольфрам", "W");
+        nameToSymbol.put("рений", "Re");
+        nameToSymbol.put("осмий", "Os");
+        nameToSymbol.put("иридий", "Ir");
+        nameToSymbol.put("платина", "Pt");
+        nameToSymbol.put("золото", "Au");
+        nameToSymbol.put("ртуть", "Hg");
+        nameToSymbol.put("таллий", "Tl");
+        nameToSymbol.put("свинец", "Pb");
+        nameToSymbol.put("висмут", "Bi");
+        nameToSymbol.put("полоний", "Po");
+        nameToSymbol.put("астат", "At");
+        nameToSymbol.put("радон", "Rn");
+        nameToSymbol.put("франций", "Fr");
+        nameToSymbol.put("радий", "Ra");
+        nameToSymbol.put("актиний", "Ac");
+        nameToSymbol.put("торий", "Th");
+        nameToSymbol.put("протактиний", "Pa");
+        nameToSymbol.put("уран", "U");
+        nameToSymbol.put("нептуний", "Np");
+        nameToSymbol.put("плутоний", "Pu");
+        nameToSymbol.put("америций", "Am");
+        nameToSymbol.put("кюрий", "Cm");
+        nameToSymbol.put("берклий", "Bk");
+        nameToSymbol.put("калифорний", "Cf");
+        nameToSymbol.put("эйнштейний", "Es");
+        nameToSymbol.put("фермий", "Fm");
+        nameToSymbol.put("менделевий", "Md");
+        nameToSymbol.put("нобелий", "No");
+        nameToSymbol.put("лоуренсий", "Lr");
+        nameToSymbol.put("резерфордий", "Rf");
+        nameToSymbol.put("дубний", "Db");
+        nameToSymbol.put("сиборгий", "Sg");
+        nameToSymbol.put("борий", "Bh");
+        nameToSymbol.put("хассий", "Hs");
+        nameToSymbol.put("мейтнерий", "Mt");
+        nameToSymbol.put("дармштадтий", "Ds");
+        nameToSymbol.put("рентгений", "Rg");
+        nameToSymbol.put("коперниций", "Cn");
+        nameToSymbol.put("нихоний", "Nh");
+        nameToSymbol.put("флеровий", "Fl");
+        nameToSymbol.put("московий", "Mc");
+        nameToSymbol.put("ливерморий", "Lv");
+        nameToSymbol.put("теннессин", "Ts");
+        nameToSymbol.put("оганесон", "Og");
         // Английские
         nameToSymbol.put("hydrogen", "H");
         nameToSymbol.put("helium", "He");
         nameToSymbol.put("lithium", "Li");
+        nameToSymbol.put("beryllium", "Be");
+        nameToSymbol.put("boron", "B");
         nameToSymbol.put("carbon", "C");
+        nameToSymbol.put("nitrogen", "N");
         nameToSymbol.put("oxygen", "O");
-        nameToSymbol.put("iron", "Fe");
-        nameToSymbol.put("gold", "Au");
-        nameToSymbol.put("silver", "Ag");
-        nameToSymbol.put("copper", "Cu");
+        nameToSymbol.put("fluorine", "F");
+        nameToSymbol.put("neon", "Ne");
+        nameToSymbol.put("sodium", "Na");
+        nameToSymbol.put("magnesium", "Mg");
         nameToSymbol.put("aluminum", "Al");
+        nameToSymbol.put("silicon", "Si");
+        nameToSymbol.put("phosphorus", "P");
+        nameToSymbol.put("sulfur", "S");
+        nameToSymbol.put("chlorine", "Cl");
+        nameToSymbol.put("argon", "Ar");
+        nameToSymbol.put("potassium", "K");
+        nameToSymbol.put("calcium", "Ca");
+        nameToSymbol.put("scandium", "Sc");
+        nameToSymbol.put("titanium", "Ti");
+        nameToSymbol.put("vanadium", "V");
+        nameToSymbol.put("chromium", "Cr");
+        nameToSymbol.put("manganese", "Mn");
+        nameToSymbol.put("iron", "Fe");
+        nameToSymbol.put("cobalt", "Co");
+        nameToSymbol.put("nickel", "Ni");
+        nameToSymbol.put("copper", "Cu");
+        nameToSymbol.put("zinc", "Zn");
+        nameToSymbol.put("gallium", "Ga");
+        nameToSymbol.put("germanium", "Ge");
+        nameToSymbol.put("arsenic", "As");
+        nameToSymbol.put("selenium", "Se");
+        nameToSymbol.put("bromine", "Br");
+        nameToSymbol.put("krypton", "Kr");
+        nameToSymbol.put("rubidium", "Rb");
+        nameToSymbol.put("strontium", "Sr");
+        nameToSymbol.put("yttrium", "Y");
+        nameToSymbol.put("zirconium", "Zr");
+        nameToSymbol.put("niobium", "Nb");
+        nameToSymbol.put("molybdenum", "Mo");
+        nameToSymbol.put("technetium", "Tc");
+        nameToSymbol.put("ruthenium", "Ru");
+        nameToSymbol.put("rhodium", "Rh");
+        nameToSymbol.put("palladium", "Pd");
+        nameToSymbol.put("silver", "Ag");
+        nameToSymbol.put("cadmium", "Cd");
+        nameToSymbol.put("indium", "In");
+        nameToSymbol.put("tin", "Sn");
+        nameToSymbol.put("antimony", "Sb");
+        nameToSymbol.put("tellurium", "Te");
+        nameToSymbol.put("iodine", "I");
+        nameToSymbol.put("xenon", "Xe");
+        nameToSymbol.put("cesium", "Cs");
+        nameToSymbol.put("barium", "Ba");
+        nameToSymbol.put("lanthanum", "La");
+        nameToSymbol.put("cerium", "Ce");
+        nameToSymbol.put("praseodymium", "Pr");
+        nameToSymbol.put("neodymium", "Nd");
+        nameToSymbol.put("promethium", "Pm");
+        nameToSymbol.put("samarium", "Sm");
+        nameToSymbol.put("europium", "Eu");
+        nameToSymbol.put("gadolinium", "Gd");
+        nameToSymbol.put("terbium", "Tb");
+        nameToSymbol.put("dysprosium", "Dy");
+        nameToSymbol.put("holmium", "Ho");
+        nameToSymbol.put("erbium", "Er");
+        nameToSymbol.put("thulium", "Tm");
+        nameToSymbol.put("ytterbium", "Yb");
+        nameToSymbol.put("lutetium", "Lu");
+        nameToSymbol.put("hafnium", "Hf");
+        nameToSymbol.put("tantalum", "Ta");
+        nameToSymbol.put("tungsten", "W");
+        nameToSymbol.put("rhenium", "Re");
+        nameToSymbol.put("osmium", "Os");
+        nameToSymbol.put("iridium", "Ir");
+        nameToSymbol.put("platinum", "Pt");
+        nameToSymbol.put("gold", "Au");
+        nameToSymbol.put("mercury", "Hg");
+        nameToSymbol.put("thallium", "Tl");
+        nameToSymbol.put("lead", "Pb");
+        nameToSymbol.put("bismuth", "Bi");
+        nameToSymbol.put("polonium", "Po");
+        nameToSymbol.put("astatine", "At");
+        nameToSymbol.put("radon", "Rn");
+        nameToSymbol.put("francium", "Fr");
+        nameToSymbol.put("radium", "Ra");
+        nameToSymbol.put("actinium", "Ac");
+        nameToSymbol.put("thorium", "Th");
+        nameToSymbol.put("protactinium", "Pa");
+        nameToSymbol.put("uranium", "U");
+        nameToSymbol.put("neptunium", "Np");
+        nameToSymbol.put("plutonium", "Pu");
+        nameToSymbol.put("americium", "Am");
+        nameToSymbol.put("curium", "Cm");
+        nameToSymbol.put("berkelium", "Bk");
+        nameToSymbol.put("californium", "Cf");
+        nameToSymbol.put("einsteinium", "Es");
+        nameToSymbol.put("fermium", "Fm");
+        nameToSymbol.put("mendelevium", "Md");
+        nameToSymbol.put("nobelium", "No");
+        nameToSymbol.put("lawrencium", "Lr");
+        nameToSymbol.put("rutherfordium", "Rf");
+        nameToSymbol.put("dubnium", "Db");
+        nameToSymbol.put("seaborgium", "Sg");
+        nameToSymbol.put("bohrium", "Bh");
+        nameToSymbol.put("hassium", "Hs");
+        nameToSymbol.put("meitnerium", "Mt");
+        nameToSymbol.put("darmstadtium", "Ds");
+        nameToSymbol.put("roentgenium", "Rg");
+        nameToSymbol.put("copernicium", "Cn");
+        nameToSymbol.put("nihonium", "Nh");
+        nameToSymbol.put("flerovium", "Fl");
+        nameToSymbol.put("moscovium", "Mc");
+        nameToSymbol.put("livermorium", "Lv");
+        nameToSymbol.put("tennessine", "Ts");
+        nameToSymbol.put("oganesson", "Og");
 
         String lowerName = name.toLowerCase();
         for (java.util.Map.Entry<String, String> entry : nameToSymbol.entrySet()) {
