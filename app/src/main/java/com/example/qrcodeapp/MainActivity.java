@@ -35,9 +35,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String LOCAL_PREFIX = "local://";
+    private static final String LOCAL_PREFIX = "local://"; //попытка локального хранения данных в qr-коде
     // UI элементы
-    private Button btnScan, btnClear, btnClearHistory, btnShowDescription;
+    private Button btnScan, btnClear, btnClearHistory, btnShowDescription, btn_combine_elements;
     private TextView TvResultTitle, TvResultType, TvResultContent, TvResultLink;
     private ImageView IvResultImage;
     private LinearLayout historyContainer;
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         historyContainer = findViewById(R.id.history_container);
         scrollView = findViewById(R.id.scroll_view);
         btnShowDescription = findViewById(R.id.btn_show_description);
-
+        btn_combine_elements = findViewById(R.id.btn_combine_elements);
     }
 
     private void setupClickListeners() {
@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         if (btnShowDescription != null) {
             btnShowDescription.setOnClickListener(v -> showLastScanDescription());
         }
+        btn_combine_elements.setOnClickListener(v -> showCombineElementDialog());
     }
 
     private void startQRScanner() {
@@ -1169,5 +1170,135 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this, "Ошибка при открытии диалога", Toast.LENGTH_SHORT).show();
         }
+    }
+    // Получить список химических элементов из истории
+    private List<ChemicalData.ChemicalElement> getChemicalElementsFromHistory() {
+        List<ChemicalData.ChemicalElement> elements = new ArrayList<>();
+
+        for (ScanHistoryItem item : historyList) {
+            String rawData = item.getRawData();
+            String dataType = item.getDataType();
+
+            // Проверяем, является ли этот элемент химическим
+            if (dataType.contains("Химический элемент") ||
+                    (rawData != null && rawData.contains("|"))) {
+
+                String description = null;
+                if (rawData != null && rawData.contains("|")) {
+                    String[] parts = rawData.split("\\|", 2);
+                    description = parts[1].trim();
+                } else {
+                    description = item.getDisplayText();
+                }
+
+                if (description != null) {
+                    String symbol = getChemicalSymbolFromName(description);
+                    if (symbol != null) {
+                        ChemicalData.ChemicalElement element = ChemicalData.getElement(symbol);
+                        if (element != null && !containsElement(elements, element)) {
+                            elements.add(element);
+                        }
+                    }
+                }
+            }
+        }
+
+        return elements;
+    }
+
+    // Проверка, есть ли уже элемент в списке
+    private boolean containsElement(List<ChemicalData.ChemicalElement> list, ChemicalData.ChemicalElement element) {
+        for (ChemicalData.ChemicalElement e : list) {
+            if (e.getSymbol().equals(element.getSymbol())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private void showCombineElementDialog(){
+        List<ChemicalData.ChemicalElement> elements = getChemicalElementsFromHistory();
+        if(elements.size() < 2){
+            Toast.makeText(this, "Нужно отсканировать минимум 2 химических элемента", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        String[] elementsNames = new String[elements.size()];
+        for (int i = 0; i < elements.size(); i++) {
+            ChemicalData.ChemicalElement e = elements.get(i);
+            elementsNames[i] = e.getName() + " (" + e.getSymbol() + ")";
+        }
+
+        //диалог выбора 1 элемента
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Выберите первый элемент");
+        builder.setItems(elementsNames, (dialog, which) ->{
+            ChemicalData.ChemicalElement first = elements.get(which);
+            showSecondElementDialog(first, elements, elementsNames);
+        });
+        builder.setCancelable(true);
+        builder.show();
+    }
+    private void showSecondElementDialog(ChemicalData.ChemicalElement first, List<ChemicalData.ChemicalElement> elements, String[] elementsNames){
+        //диалог выбора 2 элемента
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Выберите второй элемент (для реакции с " + first.getName() + ")");
+        builder.setItems(elementsNames, (dialog, which) ->{
+            ChemicalData.ChemicalElement second = elements.get(which);
+            if(first.getSymbol().equals(second.getSymbol())){
+                Toast.makeText(this, "Выберите другой элемент!", Toast.LENGTH_SHORT).show();
+                showSecondElementDialog(first, elements, elementsNames);
+                return;
+            }
+            showReactionResult(first, second);
+        });
+        builder.setCancelable(true);
+        builder.show();
+    }
+    private void showReactionResult(ChemicalData.ChemicalElement first,
+                                    ChemicalData.ChemicalElement second) {
+        ChemicalReactions.Reaction reaction = ChemicalReactions.getReaction(
+                first.getSymbol(), second.getSymbol());
+
+        // Создаем диалог с результатом
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_discription, null);
+        builder.setView(dialogView);
+
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(true);
+
+        TextView titleView = dialogView.findViewById(R.id.dialog_title);
+        TextView typeView = dialogView.findViewById(R.id.dialog_type);
+        TextView timeView = dialogView.findViewById(R.id.dialog_time);
+        TextView descriptionView = dialogView.findViewById(R.id.dialog_description);
+        Button closeButton = dialogView.findViewById(R.id.dialog_close);
+
+        titleView.setText("⚗️ Химическая реакция ⚗️");
+
+        if (reaction != null) {
+            typeView.setText("Реагенты: " + reaction.getReactants());
+            timeView.setText("Условия: " + reaction.getConditions());
+
+            String fullInfo = "Уравнение реакции:\n" + reaction.getEquation() +
+                    "\n\n═══════════════════════════\n" +
+                    "Продукты:\n" + reaction.getProducts() +
+                    "\n\n═══════════════════════════\n" +
+                    "Описание:\n" + reaction.getDescription();
+            descriptionView.setText(fullInfo);
+
+        } else {
+            typeView.setText(first.getName() + " + " + second.getName());
+            timeView.setText("Реакция не известна");
+
+            String fullInfo = "В базе данных пока нет информации о реакции между\n" +
+                    first.getName() + " (" + first.getSymbol() + ") и " +
+                    second.getName() + " (" + second.getSymbol() + ")\n\n" +
+                    "Возможно, эти элементы не реагируют друг с другом,\n" +
+                    "или требуются особые условия (температура, давление, катализатор).";
+            descriptionView.setText(fullInfo);
+        }
+
+        closeButton.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
     }
 }

@@ -97,37 +97,46 @@
             android:id="@+id/btn_scan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Сканировать QR-код"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#2196F3"/>
+            android:backgroundTint="#2196F3"
+            android:text="@string/btn_scan" />
 
         <Button
             android:id="@+id/btn_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Очистить экран"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#2196F3"/>
+            android:backgroundTint="#2196F3"
+            android:text="@string/btn_clear" />
 
         <Button
             android:id="@+id/btn_clear_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Очистить историю"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:backgroundTint="#FF4444"/>
+            android:backgroundTint="#FF4444"
+            android:text="@string/btn_clear_history" />
 
         <Button
             android:id="@+id/btn_show_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Показать описание"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:backgroundTint="#2196F3"/>
+            android:backgroundTint="#2196F3"
+            android:text="@string/btn_show_description" />
+
+        <Button
+            android:id="@+id/btn_combine_elements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#4CAF50"
+            android:text="@string/btn_combine_elements" />
 
         <!-- Разделитель и заголовок истории -->
         <View

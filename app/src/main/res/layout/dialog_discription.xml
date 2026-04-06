@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="20dp"
         tools:layout_editor_absoluteY="20dp"
-        tools:text="@string/dialog_zagolovok"
+        tools:text="@string/TV_dialog_zagolovok"
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="@color/black"

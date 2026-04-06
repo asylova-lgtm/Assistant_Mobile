@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">QR Scanner с историей</string>
-    <string name="dialog_zagolovok">Описание</string>
+    <string name="btn_scan">Сканировать Qr-код</string>
+    <string name="btn_clear">Очистить экран</string>
+    <string name="btn_clear_history">Очистить историю</string>
+    <string name="btn_show_description">Показать описание</string>
+    <string name="btn_combine_elements">Собрать уравнение</string>
+    <string name="TV_dialog_zagolovok">Собрать уравнение</string>
 </resources>
